@@ -1,0 +1,10 @@
+@tailwind base;
+html {
+    scroll-behavior: smooth;
+  }
+@tailwind components;
+@tailwind utilities;
+
+.custom-min-h-screen {
+    min-height: calc(100vh - 30%) !important;
+}
