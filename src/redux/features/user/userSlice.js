@@ -53,6 +53,8 @@ export const bURLProperty = `${SubFolder}/api/aproperty`;
 export const bURLServices = `${SubFolder}/api/aheaderservices`;
 export const bURLAlphaAdmin = `${SubFolder}/api/alphaadmin`;
 export const bURLContactUs = `${SubFolder}/api/acontactus`;
+export const bURLAPropertyInclusion = `${SubFolder}/api/APropertyInclusion`;
+export const bURLAPropertyAmenity= `${SubFolder}/api/APropertyAmenities`;
 
 export const GetDashboard = createAsyncThunk("GetDashboard", () => {
   const config = {
@@ -98,96 +100,6 @@ export const Login = createAsyncThunk("Login", (params) => {
     .then((response) => response.data);
 });
 
-export const AddProductWheels = createAsyncThunk("AddProductWheels", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  };
-  return axios
-    .post(bURLAdministrator+"/AddProductWheels",params.data,config)
-    .then((response) => response.data);
-});
-
-export const GetCustomers = createAsyncThunk("GetCustomers", () => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .get(bURLAdministrator+"/GetCustomers",config)
-    .then((response) => response.data);
-});
-
-export const PriceAdjustmentofProduct = createAsyncThunk("PriceAdjustmentofProduct", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .post(bURLAdministrator+"/PriceAdjustment",params.data,config)
-    .then((response) => response.data);
-});
-
-export const StockAdjustmentofProduct = createAsyncThunk("StockAdjustmentofProduct", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .post(bURLAdministrator+"/StockAdjustment",params.data,config)
-    .then((response) => response.data);
-});
-
-export const RemoveProductWheel = createAsyncThunk("RemoveProductWheel", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .post(bURLAdministrator+"/RemoveProductWheel",params.data,config)
-    .then((response) => response.data);
-});
-
-export const RemoveVoucherAPI = createAsyncThunk("RemoveVoucherAPI", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .put(bURLAdministrator+"/RemoveVoucher",params.data,config)
-    .then((response) => response.data);
-});
-
-export const AddVoucher = createAsyncThunk("AddVoucher", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .post(bURLAdministrator+"/AddVoucher",params.data,config)
-    .then((response) => response.data);
-});
-
-export const UpdateVoucher = createAsyncThunk("UpdateVoucher", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .put(bURLAdministrator+"/UpdateVoucher",params.data,config)
-    .then((response) => response.data);
-});
-
-
-
 export const GetAllProducts = createAsyncThunk("GetAllProducts", () => {
   const config = {
     headers: {
@@ -207,52 +119,6 @@ export const GetAllOrders = createAsyncThunk("GetAllOrders", () => {
   };
   return axios
     .get(bURLUser+"/GetOrders",config)
-    .then((response) => response.data);
-});
-
-export const GetOrder = createAsyncThunk("GetOrder", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .get(`${bURLUser}/GetOrder/${params.data.id}`,config)
-    .then((response) => response.data);
-});
-
-
-export const GetVouchers = createAsyncThunk("GetVouchers", () => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .get(bURLUser+"/GetVouchers",config)
-    .then((response) => response.data);
-});
-
-
-export const GetCustomerExcel = createAsyncThunk("GetCustomerExcel", () => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .get(bURLAdministrator+"/ExportExcelCustomer",config)
-    .then((response) => response.data);
-});
-
-export const Order = createAsyncThunk("Order", (params) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return axios
-    .post(bURLUser+"/Order",params.data,config)
     .then((response) => response.data);
 });
 
@@ -356,6 +222,114 @@ export const GetAllContacts = createAsyncThunk("GetAllContacts", (params) => {
     .then((response) => response.data);
 });
 
+//INCLUSIONS
+export const GetInclusionById = createAsyncThunk("GetInclusionById", async (params, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice?.xuser?.Token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}` // Include your token here
+    },
+  };
+  return axios
+    .get(`${bURLAPropertyInclusion}/GetForeignKey/${params.id}`,config)
+    .then((response) => response.data);
+});
+
+export const SaveInclusion = createAsyncThunk("SaveInclusion", async (params, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice?.xuser?.Token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}` // Include your token here
+    },
+  };
+  return axios
+    .post(`${bURLAPropertyInclusion}`,params.data,config)
+    .then((response) => response.data);
+});
+
+export const UpdateInclusion = createAsyncThunk("UpdateInclusion", async (params, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice?.xuser?.Token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}` // Include your token here
+    },
+  };
+  return axios
+    .put(`${bURLAPropertyInclusion}/${params.id}`, params.data, config)
+    .then((response) => response.data);
+});
+
+export const DeleteInclusion = createAsyncThunk("DeleteInclusion", async (params, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice?.xuser?.Token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}` // Include your token here
+    },
+  };
+  return axios
+    .delete(`${bURLAPropertyInclusion}/${params.id}`, config)
+    .then((response) => response.data);
+});
+
+
+//AMENTITIES
+export const GetAmenityById = createAsyncThunk("GetAmenityById", async (params, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice?.xuser?.Token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}` // Include your token here
+    },
+  };
+  return axios
+    .get(`${bURLAPropertyAmenity}/GetForeignKey/${params.id}`,config)
+    .then((response) => response.data);
+});
+
+export const SaveAmenity = createAsyncThunk("SaveAmenity", async (params, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice?.xuser?.Token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}` // Include your token here
+    },
+  };
+  return axios
+    .post(`${bURLAPropertyAmenity}`,params.data,config)
+    .then((response) => response.data);
+});
+
+export const UpdateAmenity = createAsyncThunk("UpdateAmenity", async (params, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice?.xuser?.Token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}` // Include your token here
+    },
+  };
+  return axios
+    .put(`${bURLAPropertyAmenity}/${params.id}`, params.data, config)
+    .then((response) => response.data);
+});
+
+export const DeleteAmenity = createAsyncThunk("DeleteAmenity", async (params, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice?.xuser?.Token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}` // Include your token here
+    },
+  };
+  return axios
+    .delete(`${bURLAPropertyAmenity}/${params.id}`, config)
+    .then((response) => response.data);
+});
+
+
 
 
 const userSlice = createSlice({
@@ -425,20 +399,6 @@ const userSlice = createSlice({
     builder.addCase(Login.rejected, (state, action) => {
       state.login = false;
       toast.error("Incorrect username or password. Please try again.");
-    });
-
-    builder.addCase(AddProductWheels.pending, (state) => {
-      state.loading = true;
-    });
-
-    builder.addCase(AddProductWheels.fulfilled, (state, action) => {
-      state.loading = false;
-      toast.success("Product successfully added.");
-    });
-
-    builder.addCase(AddProductWheels.rejected, (state, action) => {
-      state.loading = false;
-      toast.error("Product unsuccessfully added. Please try again.");
     });
   },
 });

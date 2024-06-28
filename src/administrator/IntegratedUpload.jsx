@@ -68,7 +68,6 @@ const IntegratedUpload = () => {
           </div>
         </Fragment>
       )}
-
       <AlertMessage />
     </div>
   );

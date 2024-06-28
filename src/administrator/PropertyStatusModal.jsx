@@ -1,10 +1,8 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  PriceAdjustmentofProduct,
   UpdateProperty,
-  setTFetch,
 } from "../redux/features/user/userSlice";
 import { toast } from "react-toastify";
 import StatusDropdown from "./component/StatusDropdown";

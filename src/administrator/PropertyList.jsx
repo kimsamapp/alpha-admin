@@ -100,6 +100,13 @@ export function PropertyList() {
     } else if (type === 100) {
       navigate(`/property/management/upload/${item.PropertyId}`);
     }
+    else if (type === 1000) {
+      navigate(`/property/management/amenity/${item.PropertyId}`);
+    }
+    else if (type === 10000) {
+      navigate(`/property/management/inclusion/${item.PropertyId}`);
+    }
+    
   };
 
   useEffect(() => {
@@ -114,6 +121,7 @@ export function PropertyList() {
   const GetAll = async () => {
     let resultQ = await dispatch(GetAllProperty());
     if (resultQ.meta.requestStatus === "fulfilled") {
+      console.log(resultQ.payload);
       setList(resultQ.payload);
     } else if (resultQ.meta.requestStatus === "rejected") {
       toast.error("Please contact administrator.");
@@ -326,10 +334,19 @@ export function PropertyList() {
                         </IconButton>
                       </Tooltip>
 
-                      <Tooltip content="Amenities/Inclusions">
+                      <Tooltip content="Amenities">
                         <IconButton
                           variant="text"
-                          onClick={(e) => modalToDisplay(e, 2, Properties)}
+                          onClick={(e) => modalToDisplay(e, 1000, Properties)}
+                        >
+                          <FolderPlusIcon className="h-4 w-4" />
+                        </IconButton>
+                      </Tooltip>
+
+                      <Tooltip content="Inclusions">
+                        <IconButton
+                          variant="text"
+                          onClick={(e) => modalToDisplay(e, 10000, Properties)}
                         >
                           <FolderPlusIcon className="h-4 w-4" />
                         </IconButton>

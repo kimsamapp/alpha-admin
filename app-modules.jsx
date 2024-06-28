@@ -8,9 +8,10 @@ import PropertyForm from './src/administrator/PropertyForm';
 import EmailLayout from './src/administrator/EmailLayout';
 import RegisterUser from './src/administrator/RegisterUser';
 import NotFoundPage from './src/administrator/NotFoundPage';
-import ImageUploader from './src/administrator/ImageUploader';
 import IntegratedUpload from './src/administrator/IntegratedUpload';
 import RealEstatePage from './src/administrator/RealEstatePage';
+import Amenities from './src/administrator/Amenity';
+import AInclusions from './src/administrator/Inclusion';
 
 export const anAuthenticatedPaths = [
     {
@@ -71,5 +72,14 @@ export const authenticatedPaths = [
         path : '/property/management/view/:id?',
         component : <RealEstatePage />
     }
-    
+    ,
+    {
+        path : '/property/management/inclusion/:id?',
+        component : <AInclusions />
+    }
+    ,
+    {
+        path : '/property/management/amenity/:id?',
+        component : <Amenities />
+    }
 ]
